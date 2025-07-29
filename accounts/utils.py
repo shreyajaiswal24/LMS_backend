@@ -11,16 +11,18 @@ def generate_password():
 
 def generate_student_id():
     # Generate a username based on first and last name and registration date
+    org_name="TNC"
     registered_year = datetime.now().strftime("%Y")
     students_count = get_user_model().objects.filter(is_trainee=True).count()
-    return f"{settings.STUDENT_ID_PREFIX}-{registered_year}-{students_count}"
+    return f"{org_name}-{settings.STUDENT_ID_PREFIX}-{registered_year}-{students_count}"
 
 
 def generate_lecturer_id():
     # Generate a username based on first and last name and registration date
+    org_name="TNC"
     registered_year = datetime.now().strftime("%Y")
     lecturers_count = get_user_model().objects.filter(is_instructor_examiner=True).count()
-    return f"{settings.LECTURER_ID_PREFIX}-{registered_year}-{lecturers_count}"
+    return f"{org_name}-{settings.LECTURER_ID_PREFIX}-{registered_year}-{lecturers_count}"
 
 
 def generate_student_credentials():
