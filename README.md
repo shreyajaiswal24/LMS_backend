@@ -1,16 +1,4 @@
-![Group 23](https://github.com/user-attachments/assets/4e84251a-27b0-462b-bd5e-fb0bcadc4694)
-
-### The world’s most high-end designed, lightweight, and feature-rich learning management system.
-
-# SkyLearn: Open source learning management system
-
-Learning management system using Django web framework. You might want to develop a learning management system (also known as a school/college management system) for a school/college organization, or simply for the purpose of learning the tech stack and enhancing your portfolio. In either case, this project would be a great way to get started. The aim is to create the world's most lightweight yet feature-rich learning management system. However, this is not possible without your support, so please give it a star ⭐️.
-
-_Documentation is under development_
-
-Let's enhance the project by contributing! 👩‍💻👩‍💻
-
-<img width="1440" alt="screenshot" src="https://github.com/user-attachments/assets/08644f49-6ae0-4695-86cc-afe331c6f61a">
+LMS 60Motion
 
 ## Current features
 
@@ -58,11 +46,7 @@ If you would like to contribute, simply begin by implementing one from the list 
 
 # Installation
 
-- Clone the repo with
-
-```bash
-git clone https://github.com/SkyCascade/SkyLearn.git
-```
+- Clone the repo
 
 - Create and activate a python virtual environment
 
@@ -94,4 +78,3 @@ Last but not least, go to this address http://127.0.0.1:8000
 
 - Quiz part: https://github.com/tomwalker/django_quiz
 
-#### Show your support by ⭐️ this project!
