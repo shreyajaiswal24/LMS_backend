@@ -1,6 +1,6 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
-from .models import Session, Semester, NewsAndEvents
+from .models import GoogleMeetLink, Semester, NewsAndEvents
 
 
 class NewsAndEventsAdmin(TranslationAdmin):
@@ -8,5 +8,5 @@ class NewsAndEventsAdmin(TranslationAdmin):
 
 
 admin.site.register(Semester)
-admin.site.register(Session)
+admin.site.register(GoogleMeetLink)
 admin.site.register(NewsAndEvents, NewsAndEventsAdmin)

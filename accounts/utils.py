@@ -24,13 +24,29 @@ def generate_lecturer_id():
     lecturers_count = get_user_model().objects.filter(is_instructor_examiner=True).count()
     return f"{org_name}-{settings.LECTURER_ID_PREFIX}-{registered_year}-{lecturers_count}"
 
+def generate_operations_id():
+    org_name="TNC"
+    registered_year = datetime.now().strftime("%Y")
+    operations_count = get_user_model().objects.filter(is_operations=True).count()
+    return f"{org_name}-{settings.OPERATIONS_ID_PREFIX}-{registered_year}-{operations_count}"
+
+# def generate_examiner_id():
+#     org_name="TNC"
+#     registered_year = datetime.now().strftime("%Y")
+#     examiners_count = get_user_model().objects.filter(is_examiner=True).count()
+#     return f"{org_name}-{settings.EXAMINER_ID_PREFIX}-{registered_year}-{examiners_count}"
 
 def generate_student_credentials():
     return generate_student_id(), generate_password()
 
-
 def generate_lecturer_credentials():
     return generate_lecturer_id(), generate_password()
+
+def generate_operations_credentials():
+    return generate_operations_id(), generate_password()
+
+# def generate_examiner_credentials():
+#     return generate_examiner_id(), generate_password()
 
 
 class EmailThread(threading.Thread):
@@ -53,8 +69,12 @@ class EmailThread(threading.Thread):
 def send_new_account_email(user, password):
     if user.is_trainee:
         template_name = "accounts/email/new_student_account_confirmation.html"
-    else:
+    elif user.is_instructor_examiner:
         template_name = "accounts/email/new_lecturer_account_confirmation.html"
+    elif user.is_operations:
+        template_name = "accounts/email/new_lecturer_account_confirmation.html"
+    # elif user.is_examiner:
+    #     template_name = "accounts/email/new_lecturer_account_confirmation.html"
     email = {
         "subject": "Your SkyLearn account confirmation and credentials",
         "recipient_list": [user.email],

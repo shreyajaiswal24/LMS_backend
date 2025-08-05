@@ -17,15 +17,15 @@
 <p>{{ student.level }} {% trans 'Result' %}</p>
 
 <div class="table-responsive">
-  <div class="table-title"><u>{% trans 'First Semester:' %}</u></div>
+  {% comment %} <div class="table-title"><u>{% trans 'First Semester:' %}</u></div> {% endcomment %}
   <table class="table table-light">
     <thead>
       <tr>
         <th>#</th>
         <th>{% trans 'Course Title' %}</th>
         <th>{% trans 'Course Code' %}</th>
-        <th>{% trans 'Cr.Hr' %}</th>
-        <th>{% trans 'Grade' %}</th>
+        {% comment %} <th>{% trans 'Cr.Hr' %}</th> {% endcomment %}
+        {% comment %} <th>{% trans 'Grade' %}</th> {% endcomment %}
         <th>{% trans 'Points' %}</th>
         <th>{% trans 'Comment' %}</th>
       </tr>
@@ -81,7 +81,7 @@
   </table>
 </div>
   
-<div class="table-responsive p-0 px-2 mt-3">
+{% comment %} <div class="table-responsive p-0 px-2 mt-3">
   <div class="table-title"><u>{% trans 'Second Semester:' %}</u></div>
   <table class="table table-light">
     <thead>
@@ -178,7 +178,7 @@
     <th></th>
     <th></th>
     <th><label>{% trans 'Previous CGPA:' %}</label> {{ previousCGPA }}</th>
-  </tr>
-</tbody>
+  </tr> {% endcomment %}
+{% comment %} </tbody> {% endcomment %}
 <br>
 {% endblock %}

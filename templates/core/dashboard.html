@@ -62,7 +62,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-6 col-md-3 mb-3 px-2">
+	{% comment %} <div class="col-6 col-md-3 mb-3 px-2">
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-purple"></i></h3>
 			<div class="text-right">
@@ -70,8 +70,8 @@
 				<h2>500</h2>
 			</div>
 		</div>
-	</div>
-	<div class="col-6 col-md-3 mb-3 px-2">
+	</div> {% endcomment %}
+	{% comment %} <div class="col-6 col-md-3 mb-3 px-2">
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-red"></i></h3>
 			<div class="text-right">
@@ -107,9 +107,9 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> {% endcomment %}
 
-<div class="row px-2">
+{% comment %} <div class="row px-2">
 	<div class="col-md-6 p-2">
 		<div class="chart-wrap">
 			<i class="fas fa-expand-alt"></i>
@@ -127,7 +127,7 @@
 			<i class="fas fa-expand-alt"></i>
 			<canvas id="students_grade"></canvas>
 		</div>
-	</div>
+	</div> {% endcomment %}
 	<div class="col-md-6 p-2">
 		<div class="card w-100 h-100 p-3">
 			<h5>{% trans 'Latest activities' %}</h5>
@@ -142,7 +142,7 @@
 	</div>
 </div>
 <br>
-<div class="bg-white p-3">
+{% comment %} <div class="bg-white p-3">
 	<h5 class="border-bottom pb-2">{% trans 'School Demographics' %}</h5>
 	<div class="row">
 		<div class="col-md-4">
@@ -158,11 +158,11 @@
 			<canvas id="language"></canvas>
 		</div>
 	</div>
-</div>
+</div> {% endcomment %}
 
 {% endblock content %}
 
-{% block js %}
+{% comment %} {% block js %}
 
 <script src="{% url 'javascript-catalog' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -177,8 +177,8 @@
 			$(this).parent('.chart-wrap').parent('.col-md-6').addClass('expand');
 		}
 	})
-</script>
-<script>
+</script> {% endcomment %}
+{% comment %} <script>
 	const malesCount = {{ males_count }}
 const femalesCount = {{ females_count }}
 
@@ -446,4 +446,4 @@ $(document).ready(function () {
 
 </script>
 
-{% endblock %}
+{% endblock %} {% endcomment %}

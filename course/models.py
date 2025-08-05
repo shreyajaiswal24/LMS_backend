@@ -7,7 +7,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from core.models import ActivityLog, Semester
+from core.models import ActivityLog, GoogleMeetLink
 from core.utils import unique_slug_generator
 
 
@@ -110,7 +110,7 @@ class CourseAllocation(models.Model):
     )
     courses = models.ManyToManyField(Course, related_name="allocated_course")
     session = models.ForeignKey(
-        "core.Session", on_delete=models.CASCADE, blank=True, null=True
+        "core.GoogleMeetLink", on_delete=models.CASCADE, blank=True, null=True
     )
 
     def __str__(self):

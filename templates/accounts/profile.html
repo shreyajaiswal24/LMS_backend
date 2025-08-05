@@ -77,15 +77,19 @@
                     <p><strong>{% trans 'First Name:' %}</strong> {{ user.first_name|title }}</p>
                     <p><strong>{% trans 'Last Name:' %}</strong> {{ user.last_name|title }}</p>
                     <p><strong>{% trans 'ID No.:' %}</strong> {{ user.username }}</p>
+                    {% if user.is_trainee %}
+                    <p><strong>{% trans 'Level:' %}</strong> {{level | title }}</p>
+                    {% endif %}
                 </div>
-                {% if user.is_trainee %}
+
+                {% comment %} {% if user.is_trainee %}
                 <hr>
                 <p class="fw-bold"><i class="me-2 fas fa-graduation-cap"></i>{% trans 'Applicant Info' %}</p>
                 <div class="dashboard-description">
                     <p><strong>{% trans 'School:' %} </strong>{% trans 'Hawas Preparatory School' %}</p>
                     <p><strong>{% trans 'Level:' %} </strong>{{ level.level }}</p>
                 </div>
-                {% endif %}
+                {% endif %} {% endcomment %}
     
                 <hr>
                 <p class="fw-bold"><i class="me-2 fas fa-phone-square-alt"></i>{% trans 'Contact Info' %}</p>

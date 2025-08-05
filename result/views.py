@@ -22,7 +22,7 @@ from reportlab.lib.enums import TA_JUSTIFY, TA_LEFT, TA_CENTER, TA_RIGHT
 from reportlab.lib.units import inch
 from reportlab.lib import colors
 
-from core.models import Session, Semester
+from core.models import GoogleMeetLink, Semester
 from course.models import Course
 from accounts.models import Student
 from accounts.decorators import lecturer_required, student_required
@@ -42,7 +42,7 @@ def add_score(request):
     Shows a page where a lecturer will select a course allocated
     to him for score entry. in a specific semester and session
     """
-    current_session = Session.objects.filter(is_current_session=True).first()
+    current_session = GoogleMeetLink.objects.filter(is_current_session=True).first()
     current_semester = Semester.objects.filter(
         is_current_semester=True, session=current_session
     ).first()
@@ -72,7 +72,7 @@ def add_score_for(request, id):
     Shows a page where a lecturer will add score for students that
     are taking courses allocated to him in a specific semester and session
     """
-    current_session = Session.objects.get(is_current_session=True)
+    current_session = GoogleMeetLink.objects.get(is_current_session=True)
     current_semester = get_object_or_404(
         Semester, is_current_semester=True, session=current_session
     )
@@ -278,7 +278,7 @@ def assessment_result(request):
 @lecturer_required
 def result_sheet_pdf_view(request, id):
     current_semester = Semester.objects.get(is_current_semester=True)
-    current_session = Session.objects.get(is_current_session=True)
+    current_session = GoogleMeetLink.objects.get(is_current_session=True)
     result = TakenCourse.objects.filter(course__pk=id)
     course = get_object_or_404(Course, id=id)
     no_of_pass = TakenCourse.objects.filter(course__pk=id, comment="PASS").count()
@@ -449,7 +449,7 @@ def result_sheet_pdf_view(request, id):
 @login_required
 @student_required
 def course_registration_form(request):
-    current_session = Session.objects.get(is_current_session=True)
+    current_session = GoogleMeetLink.objects.get(is_current_session=True)
     courses = TakenCourse.objects.filter(student__student__id=request.user.id)
     fname = request.user.username + ".pdf"
     fname = fname.replace("/", "-")

@@ -19,7 +19,7 @@ class StaffAddForm(UserCreationForm):
             }
         ),
         label="Username",
-        required=False,
+        required=True,
     )
 
     first_name = forms.CharField(
@@ -117,6 +117,7 @@ class StaffAddForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_instructor_examiner = True
+        user.username = self.cleaned_data.get("username")
         user.first_name = self.cleaned_data.get("first_name")
         user.last_name = self.cleaned_data.get("last_name")
         user.phone = self.cleaned_data.get("phone")
@@ -136,7 +137,7 @@ class StudentAddForm(UserCreationForm):
             attrs={"type": "text", "class": "form-control", "id": "username_id"}
         ),
         label="Username",
-        required=False,
+        required=True,
     )
     address = forms.CharField(
         max_length=30,
@@ -263,6 +264,7 @@ class StudentAddForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_trainee = True
+        user.username = self.cleaned_data.get("username")
         user.first_name = self.cleaned_data.get("first_name")
         user.last_name = self.cleaned_data.get("last_name")
         user.gender = self.cleaned_data.get("gender")
@@ -274,8 +276,9 @@ class StudentAddForm(UserCreationForm):
 
         if commit:
             user.save()
-            Student.objects.create(
+            student = Student.objects.create(
                 student=user,
+                id_number=self.cleaned_data.get("id_number"),
                 level=self.cleaned_data.get("level"),
                 # program=self.cleaned_data.get("program"),
             )

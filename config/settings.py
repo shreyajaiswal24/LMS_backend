@@ -28,7 +28,7 @@ SECRET_KEY = config(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "adilmohak1.pythonanywhere.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "0.0.0.0","10.2.204.40"]
 
 # change the default user models to our custom model
 AUTH_USER_MODEL = "accounts.User"
@@ -238,9 +238,10 @@ LOGGING = {
 # WhiteNoise configuration
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STUDENT_ID_PREFIX = config("STUDENT_ID_PREFIX", "ugr")
-LECTURER_ID_PREFIX = config("LECTURER_ID_PREFIX", "lec")
-
+STUDENT_ID_PREFIX = config("STUDENT_ID_PREFIX", "trn")
+LECTURER_ID_PREFIX = config("LECTURER_ID_PREFIX", "inst")
+EXAMINER_ID_PREFIX = config("EXAMINER_ID_PREFIX", "exm")
+OPERATIONS_ID_PREFIX = config("OPERATIONS_ID_PREFIX", "ops")
 
 # Constants
 YEARS = (

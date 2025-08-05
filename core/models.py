@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
-
 NEWS = _("News")
 EVENTS = _("Event")
 
@@ -21,7 +20,6 @@ SEMESTER = (
     (THIRD, _("Third")),
 )
 
-
 class NewsAndEventsQuerySet(models.query.QuerySet):
     def search(self, query):
         lookups = (
@@ -31,7 +29,6 @@ class NewsAndEventsQuerySet(models.query.QuerySet):
         )
         return self.filter(lookups).distinct()
 
-
 class NewsAndEventsManager(models.Manager):
     def get_queryset(self):
         return NewsAndEventsQuerySet(self.model, using=self._db)
@@ -40,16 +37,13 @@ class NewsAndEventsManager(models.Manager):
         return self.get_queryset()
 
     def get_by_id(self, id):
-        qs = self.get_queryset().filter(
-            id=id
-        )  # NewsAndEvents.objects == self.get_queryset()
+        qs = self.get_queryset().filter(id=id)
         if qs.count() == 1:
             return qs.first()
         return None
 
     def search(self, query):
         return self.get_queryset().search(query)
-
 
 class NewsAndEvents(models.Model):
     title = models.CharField(max_length=200, null=True)
@@ -63,27 +57,30 @@ class NewsAndEvents(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+# Remove the Session model
+# class Session(models.Model):
+#     session = models.CharField(max_length=200, unique=True)
+#     is_current_session = models.BooleanField(default=False, blank=True, null=True)
+#     next_session_begins = models.DateField(blank=True, null=True)
+# 
+#     def __str__(self):
+#         return f"{self.session}"
 
-class Session(models.Model):
-    session = models.CharField(max_length=200, unique=True)
-    is_current_session = models.BooleanField(default=False, blank=True, null=True)
-    next_session_begins = models.DateField(blank=True, null=True)
+class GoogleMeetLink(models.Model):
+    course = models.ForeignKey('course.Course', on_delete=models.CASCADE)  # Link to Course
+    meet_link = models.URLField(max_length=200)  # Field for Google Meet link
+    created_at = models.DateTimeField(auto_now_add=True)  # Timestamp for when the link was created
 
     def __str__(self):
-        return f"{self.session}"
-
+        return f"Meet link for {self.course} - {self.meet_link}"
 
 class Semester(models.Model):
     semester = models.CharField(max_length=10, choices=SEMESTER, blank=True)
     is_current_semester = models.BooleanField(default=False, blank=True, null=True)
-    session = models.ForeignKey(
-        Session, on_delete=models.CASCADE, blank=True, null=True
-    )
     next_semester_begins = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.semester}"
-
 
 class ActivityLog(models.Model):
     message = models.TextField()

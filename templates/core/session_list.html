@@ -26,9 +26,9 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th> {% trans 'Session' %} </th>
-                <th> {% trans 'Is Current Session' %} </th>
-                <th> {% trans 'Next Session Begins' %} </th>
+                <th> {% trans 'Course' %} </th>
+                <th> {% trans 'Meet Link' %} </th>
+                <th> {% trans 'Created At' %} </th>
                 {% if request.user.is_superuser %}
                 <th> {% trans 'Actions' %} </th>
                 {% endif %}
@@ -38,15 +38,13 @@
             {% for session in sessions %}
             <tr>
                 <td>{{ forloop.counter }}.</td>
-                <td>{{ session.session }}</td>
+                <td>{{ session.course }}</td>
                 <th>
-                    {% if session.is_current_session == True %}
-                    <i class="fas fa-check-circle fa-1-5x"></i>
-                    {% else %}
-                    <i class="fas fa-times-circle fa-1-5x danger"></i>
-                    {% endif %}
+                    <a href="{{ session.meet_link }}" target="_blank">
+                        <i class="fas fa-link"></i>
+                    </a>
                 </th>
-                <td>{{ session.next_session_begins }}</td>
+                <td>{{ session.created_at }}</td>
 
                 {% if request.user.is_superuser %}
                 <td> <div class="update-delete">

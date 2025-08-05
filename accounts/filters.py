@@ -1,6 +1,6 @@
 from django.db.models import Q
 import django_filters
-from .models import User, Student
+from .models import User, Student, LEVEL
 
 
 class LecturerFilter(django_filters.FilterSet):
@@ -42,8 +42,8 @@ class StudentFilter(django_filters.FilterSet):
     email = django_filters.CharFilter(
         field_name="student__email", lookup_expr="icontains", label=""
     )
-    program = django_filters.CharFilter(
-        field_name="program__title", lookup_expr="icontains", label=""
+    level = django_filters.ChoiceFilter(
+        field_name="level", choices=LEVEL, label=""
     )
 
     class Meta:
@@ -52,7 +52,7 @@ class StudentFilter(django_filters.FilterSet):
             "id_no",
             "name",
             "email",
-            "program",
+            "level",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -68,8 +68,8 @@ class StudentFilter(django_filters.FilterSet):
         self.filters["email"].field.widget.attrs.update(
             {"class": "au-input", "placeholder": "Email"}
         )
-        self.filters["program"].field.widget.attrs.update(
-            {"class": "au-input", "placeholder": "Program"}
+        self.filters["level"].field.widget.attrs.update(
+            {"class": "au-input", "placeholder": "Level", "class": "browser-default custom-select form-control"}
         )
 
     def filter_by_name(self, queryset, name, value):

@@ -47,10 +47,10 @@
                                 <th>{% trans 'Mark' %}</th>
                                 <th>{% trans 'Course Code' %}</th>
                                 <th>{% trans 'Course Title' %}</th>
-                                <th>{% trans 'Cr.Hr(s)' %}</th>
+                                {% comment %} <th>{% trans 'Cr.Hr(s)' %}</th>
                                 <th>{% trans 'Year' %}</th>
                                 <th>{% trans 'Classification' %}</th>
-                                <th>{% trans 'Elective Group' %}</th>
+                                <th>{% trans 'Elective Group' %}</th> {% endcomment %}
                             </tr>
                         </thead>
                         <tbody>
@@ -62,16 +62,16 @@
                                 </th>
                                 <td>{{ course.code }}</td>
                                 <td>{{ course.title }}</td>
-                                <td>{{ course.credit }}</td>
+                                {% comment %} <td>{{ course.credit }}</td>
                                 <td>{{ course.year }}</td>
                                 {% if course.is_elective %}
                                 <td>{% trans 'Elective' %}</td>
                                 {% else %}
                                 <td>{% trans 'Core' %}</td>
-                                {% endif %}
-                                <th>-</th>
+                                {% endif %} {% endcomment %}
+                                {% comment %} <th>-</th>
                             </tr>
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                             {% empty %}
                             <tr>
                                 <td></td>
@@ -110,10 +110,10 @@
                                 <th>{% trans 'Mark' %}</th>
                                 <th>{% trans 'Course Code' %}</th>
                                 <th>{% trans 'Course Title' %}</th>
-                                <th>{% trans 'Cr.Hr(s)' %}</th>
+                                {% comment %} <th>{% trans 'Cr.Hr(s)' %}</th>
                                 <th>{% trans 'Year' %}</th>
                                 <th>{% trans 'Classification' %}</th>
-                                <th>{% trans 'Elective Group' %}</th>
+                                <th>{% trans 'Elective Group' %}</th> {% endcomment %}
                             </tr>
                         </thead>
                         <tbody>
@@ -202,10 +202,10 @@
                                 <th>{% trans 'Mark' %}</th>
                                 <th>{% trans 'Course Code' %}</th>
                                 <th>{% trans 'Course Title' %}</th>
-                                <th>{% trans 'Cr.Hr(s)' %}</th>
+                                {% comment %} <th>{% trans 'Cr.Hr(s)' %}</th>
                                 <th>{% trans 'Year' %}</th>
                                 <th>{% trans 'Classification' %}</th>
-                                <th>{% trans 'Elective Group' %}</th>
+                                <th>{% trans 'Elective Group' %}</th> {% endcomment %}
                             </tr>
                         </thead>
                         <tbody>

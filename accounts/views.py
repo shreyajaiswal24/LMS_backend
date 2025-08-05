@@ -20,7 +20,7 @@ from accounts.forms import (
     StudentAddForm,
 )
 from accounts.models import Student, User
-from core.models import Semester, Session
+from core.models import Semester, GoogleMeetLink
 from course.models import Course
 from result.models import TakenCourse
 
@@ -74,10 +74,15 @@ def register(request):
 @login_required
 def profile(request):
     """Show profile of the current user."""
-    current_session = Session.objects.filter(is_current_session=True).first()
-    current_semester = Semester.objects.filter(
-        is_current_semester=True, session=current_session
-    ).first()
+    # Fetch the user's first and last name
+    first_name = request.user.first_name
+    last_name = request.user.last_name
+
+    # Find the current session based on first and last name
+    current_session = GoogleMeetLink.objects.filter(course__level=first_name + " " + last_name).first()
+
+    # Find the current semester based on first and last name
+    current_semester = Semester.objects.filter(semester=first_name + " " + last_name).first()
 
     context = {
         "title": request.user.get_full_name,
@@ -87,20 +92,18 @@ def profile(request):
 
     if request.user.is_instructor_examiner:
         courses = Course.objects.filter(
-            allocated_course__lecturer__pk=request.user.id, semester=current_semester
+            allocated_course__lecturer__pk=request.user.id
         )
         context["courses"] = courses
         return render(request, "accounts/profile.html", context)
 
     if request.user.is_trainee:
         student = get_object_or_404(Student, student__pk=request.user.id)
-        # parent = Parent.objects.filter(student=student).first()
         courses = TakenCourse.objects.filter(
             student__student__id=request.user.id, course__level=student.level
         )
         context.update(
             {
-                # "parent": parent,
                 "courses": courses,
                 "level": student.level,
             }
@@ -120,7 +123,7 @@ def profile_single(request, user_id):
     if request.user.id == user_id:
         return redirect("profile")
 
-    current_session = Session.objects.filter(is_current_session=True).first()
+    # current_session = GoogleMeetLink.objects.filter(course__level=user.first_name).first()
     # current_semester = Semester.objects.filter(
     #     is_current_semester=True, session=current_session
     # ).first()
@@ -129,7 +132,7 @@ def profile_single(request, user_id):
     context = {
         "title": user.get_full_name,
         "user": user,
-        "current_session": current_session,
+        # "current_session": current_session,
         # "current_semester": current_semester,
     }
 
@@ -153,6 +156,8 @@ def profile_single(request, user_id):
                 "user_type": "Student",
                 "courses": courses,
                 "student": student,
+                "level": student.level,
+                "id_number": student.id_number,
             }
         )
     else:
@@ -300,7 +305,31 @@ def student_add_view(request):
     if request.method == "POST":
         form = StudentAddForm(request.POST)
         if form.is_valid():
-            student = form.save()
+            username = form.cleaned_data['username']
+            id_number = form.cleaned_data['id_number']
+            
+            # Check if the username already exists
+            if User.objects.filter(username=username).exists():
+                messages.error(request, "This username already exists. Please use a different username.")
+                return render(request, "accounts/add_student.html", {"title": "Add Student", "form": form})
+
+            # Check if the ID number already exists
+            if Student.objects.filter(id_number=id_number).exists():
+                messages.error(request, "This ID number already exists. Please use a different ID number.")
+                return render(request, "accounts/add_student.html", {"title": "Add Student", "form": form})
+
+            # Create the User instance first
+            user = form.save()  # Save the user instance
+
+            # Now create the Student instance
+            student = Student(
+                student=user,  # Link the User instance to the Student
+                id_number=id_number,  # Use the ID number from the form
+                level=form.cleaned_data['level'],  # Assuming level is also in the form
+                # program=form.cleaned_data['program'],  # Uncomment if program is in the form
+            )
+            student.save()  # Save the Student instance
+
             full_name = student.get_full_name
             email = student.email
             messages.success(
@@ -309,7 +338,10 @@ def student_add_view(request):
                 f"An email with account credentials will be sent to {email} within a minute.",
             )
             return redirect("student_list")
-        messages.error(request, "Correct the error(s) below.")
+        else:
+            # Log the form errors for debugging
+            print(form.errors)  # This will print the errors to the console
+            messages.error(request, "Correct the error(s) below.")
     else:
         form = StudentAddForm()
     return render(
@@ -326,6 +358,7 @@ def edit_student(request, pk):
         if form.is_valid():
             form.save()
             full_name = student_user.get_full_name
+            id_number = student_user.id_number
             messages.success(request, f"Student {full_name} has been updated.")
             return redirect("student_list")
         messages.error(request, "Please correct the error below.")

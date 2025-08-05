@@ -11,6 +11,7 @@ class ProgramForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["title"].widget.attrs.update({"class": "form-control"})
+        self.fields["program_id"].widget.attrs.update({"class": "form-control"})
         # self.fields["summary"].widget.attrs.update({"class": "form-control"})
 
 

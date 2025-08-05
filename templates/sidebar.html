@@ -134,24 +134,15 @@
 					{% endfor %}
 				</select>
 			</form>
-
-			<p class="small m-0">
-				{% trans 'Read our' %} <a href="#"> {% trans 'Privacy' %} </a> {% trans 'and' %} <a href="#"> {% trans 'Terms of use.' %} </a>
-				<br />SkyLearn &copy; <script>document.write(new Date().getFullYear());</script>
-				<br />
-			</p>
-			<a href="https://github.com/SkyCascade/SkyLearn" class="btn btn-sm btn-dark mx-auto" target="_blank">
-				{% trans '⭐️ Star This Project' %}
-			</a>
 		</div>
 	</footer>
 </div>
 
-{% block js %}
+{% comment %} {% block js %}
 <script>
 	document.getElementById("lang-select").addEventListener("change", function() {
 		console.log("Changed!")
     	document.getElementById("lang-form").submit();  // Submit the form programmatically
 	});
 </script>
-{% endblock js %}
+{% endblock js %} {% endcomment %}

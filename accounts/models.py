@@ -16,8 +16,8 @@ CPTE = _("CPTE: 44Days")
 
 LEVEL = (
     # (LEVEL_COURSE, "Level course"),
-    (CPT, _("CPT: 22Days")),
-    (CPTE, _("CPTE: 44Days")),
+    (CPT, _("CPT(22Days)")),
+    (CPTE, _("CPTE(44Days)")),
 )
 
 FATHER = _("Father")
@@ -115,8 +115,6 @@ class User(AbstractUser):
     def get_user_role(self):
         if self.is_superuser:
             role = _("Superuser")
-        elif self.is_admin:
-            role = _("Admin")
         elif self.is_trainee:
             role = _("Trainee")
         elif self.is_instructor_examiner:
@@ -168,7 +166,7 @@ class StudentManager(models.Manager):
 
 class Student(models.Model):
     student = models.OneToOneField(User, on_delete=models.CASCADE)
-    id_number = models.CharField(max_length=20, unique=False, blank=True, null=True)
+    id_number = models.CharField(max_length=20, unique=True, blank=False, null=False, default="")  # Ensure this is required
     level = models.CharField(max_length=25, choices=LEVEL, null=True)
     program = models.ForeignKey(Program, on_delete=models.CASCADE, null=True)
 
