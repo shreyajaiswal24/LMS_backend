@@ -19,28 +19,53 @@
 
 <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
     <div class="row mb-4">
-        <div class="col-md-6">
+        <div class="col-12">
             <div class="card">
-                <div class="form-title">{% trans 'Email' %} &amp; {% trans 'Personal Info' %}</div>
+                <div class="form-title">{% trans 'Personal Info' %}</div>
                 <div class="card-body">
-                    {{ form.email|as_crispy_field }}
-                    {{ form.first_name|as_crispy_field }}
-                    {{ form.last_name|as_crispy_field }}
-                    {{ form.gender|as_crispy_field }}
-                    {{ form.phone|as_crispy_field }}
-                    {{ form.address|as_crispy_field }}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <p class="form-title">{% trans 'Others' %}</p>
-                <div class="card-body">
-                    {{ form.picture|as_crispy_field }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.email|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.gender|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.phone|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.address|as_crispy_field }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit">{% trans 'Update Profile' %}</button>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <p class="form-title">{% trans 'Other Info' %}</p>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.picture|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary text-white" type="submit">{% trans 'Update Profile' %}</button>
 </form>
 {% endblock content %}
