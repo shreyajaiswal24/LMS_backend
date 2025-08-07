@@ -1,0 +1,110 @@
+/* Sea Green Theme Override - Remove Purple Colors */
+:root {
+  /* Replace purple colors with new sea green */
+  --primary: #004443 !important;
+  --primary-light: #33C3B5 !important;
+  --secondary: #66D2C8 !important;
+  --accent: #E6F7F6 !important;
+  --success: #48bb78;
+  --warning: #ed8936;
+  --danger: #f56565;
+  --info: #004443 !important;
+  --light: #E6F7F6 !important;
+  --dark: #2d3748;
+  
+  /* Replace purple gradients with new sea green gradients */
+  --gradient-primary: linear-gradient(135deg, #004443 0%, #33C3B5 100%) !important;
+  --gradient-secondary: linear-gradient(135deg, #66D2C8 0%, #99E1DA 100%) !important;
+  --gradient-success: linear-gradient(135deg, #48bb78 0%, #38b2ac 100%);
+  --gradient-info: linear-gradient(135deg, #004443 0%, #33C3B5 100%) !important;
+  --gradient-warning: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+  --gradient-light: linear-gradient(135deg, #E6F7F6 0%, #CCF0ED 100%) !important;
+  
+  --shadow-sm: 0 1px 3px 0 rgba(0, 68, 67, 0.1), 0 1px 2px 0 rgba(0, 68, 67, 0.06);
+  --shadow: 0 4px 6px -1px rgba(0, 68, 67, 0.1), 0 2px 4px -1px rgba(0, 68, 67, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 68, 67, 0.1), 0 4px 6px -2px rgba(0, 68, 67, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 68, 67, 0.1), 0 10px 10px -5px rgba(0, 68, 67, 0.04);
+}
+
+/* Override any existing purple elements */
+body {
+  background: var(--gradient-light) !important;
+}
+
+/* Remove purple from links */
+a {
+  color: var(--primary) !important;
+}
+
+/* Update selection colors */
+::selection {
+  background-color: rgba(0, 68, 67, 0.2) !important;
+  color: var(--dark) !important;
+}
+
+/* Override button colors */
+.btn-primary {
+  background: var(--gradient-primary) !important;
+  border-color: var(--primary) !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #002D2C 0%, #004443 100%) !important;
+  color: white !important;
+}
+
+/* Override all button text colors */
+.btn {
+  color: white !important;
+}
+
+.btn:hover {
+  color: white !important;
+}
+
+/* Override any purple backgrounds */
+.bg-primary {
+  background: var(--primary) !important;
+}
+
+.text-primary {
+  color: var(--primary) !important;
+}
+
+/* Override focus states */
+.form-control:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 68, 67, 0.25) !important;
+}
+
+/* Override active states */
+.active {
+  background: var(--gradient-primary) !important;
+}
+
+/* Override table headers */
+.table th {
+  background: var(--gradient-primary) !important;
+  color: white !important;
+}
+
+/* Override any remaining purple/violet colors */
+[style*="#667eea"] {
+  background: #004443 !important;
+}
+
+[style*="#764ba2"] {
+  background: #33C3B5 !important;
+}
+
+/* Ensure consistent sea green theme */
+.navbar-brand {
+  color: var(--primary) !important;
+}
+
+.nav-link.active {
+  background: var(--gradient-primary) !important;
+  color: white !important;
+}
+

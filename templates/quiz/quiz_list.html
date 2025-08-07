@@ -22,7 +22,7 @@
 
 {% if request.user.is_superuser or request.user.is_instructor_examiner %}
 <div class="manage-wrap">
-    <a class="btn btn-primary" href="{% url 'quiz_create' course.slug %}"><i class="fas fa-plus"></i>{% trans 'Add Quiz' %}</a>
+    <a class="btn btn-primary text-white" href="{% url 'quiz_create' course.slug %}"><i class="fas fa-plus"></i>{% trans 'Add Quiz' %}</a>
 </div>
 {% endif %}
 

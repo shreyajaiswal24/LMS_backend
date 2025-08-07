@@ -22,32 +22,60 @@
 <form action="" method="POST">{% csrf_token %}
     <div class="row mb-3">
        
-        <div class="col-md-6">
+        <div class="col-12">
             <div class="card">
                 <p class="form-title">{% trans 'Personal Info' %}</p>
                 <div class="card-body">
-                    {{ form.first_name|as_crispy_field }}
-                    {{ form.last_name|as_crispy_field }}
-                    {{ form.gender|as_crispy_field }}
-                    {{ form.email|as_crispy_field }}
-                    {{ form.address|as_crispy_field }}
-                    {{ form.phone|as_crispy_field }}
-                    {{ form.id_number|as_crispy_field }}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 ms-auto">
-            <div class="card">
-                <p class="form-title">{% trans 'Others' %}</p>
-                <div class="card-body">
-                    {% comment %} {{ form.program|as_crispy_field }} {% endcomment %}
-                    {{ form.level|as_crispy_field }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.gender|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.email|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.address|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.phone|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.id_number|as_crispy_field }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <input class="btn btn-primary" type="submit" value="{% trans 'Save' %}">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="card">
+                <p class="form-title">{% trans 'Other Info' %}</p>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.level|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input class="btn btn-primary text-white" type="submit" value="{% trans 'Save' %}">
 </form>
 
 {% endblock content %}

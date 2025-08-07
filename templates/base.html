@@ -12,6 +12,46 @@
 
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sky-green': {
+                            50: '#E6F7F6',
+                            100: '#CCF0ED', 
+                            200: '#99E1DA',
+                            300: '#66D2C8',
+                            400: '#33C3B5',
+                            500: '#004443',
+                            600: '#003B39',
+                            700: '#002D2C',
+                            800: '#001F1E',
+                            900: '#001110',
+                        },
+                        'sea-green': {
+                            50: '#E6F7F6',
+                            100: '#CCF0ED',
+                            200: '#99E1DA',
+                            300: '#66D2C8',
+                            400: '#33C3B5',
+                            500: '#004443',
+                            600: '#003B39',
+                            700: '#002D2C',
+                            800: '#001F1E',
+                            900: '#001110',
+                        }
+                    },
+                    fontFamily: {
+                        'rubik': ['Rubik', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <!-- Fontawesome icons -->
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontawesome-6.5.1/css/all.min.css' %}">
 
@@ -19,6 +59,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap-5.3.2/css/bootstrap.min.css' %}">
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.min.css' %}">
+    
+    <!-- Sea Green Theme Override -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sea-green-theme.css' %}">
 
     <!-- <script src="https://js.stripe.com/v3/"></script> -->
     {% block header %}{% endblock %}

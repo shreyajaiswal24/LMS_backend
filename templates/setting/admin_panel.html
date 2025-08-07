@@ -6,71 +6,203 @@
 
 {% block content %}
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">{% trans 'Home' %}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{% trans 'Admin Panel' %}</li>
-    </ol>
-</nav>  
+<!-- Admin Panel with Tailwind CSS and Equal Box Sizes -->
+<div class="min-h-screen bg-gradient-to-br from-sky-green-50 to-sky-green-100 font-rubik">
+    <!-- Breadcrumb -->
+    <nav class="p-6 pt-8">
+        <ol class="flex items-center space-x-2 bg-white/80 backdrop-blur-lg rounded-2xl px-6 py-4 shadow-lg shadow-sky-green-500/10">
+            <li><a href="/" class="text-sky-green-600 hover:text-sky-green-700 font-medium transition-colors">{% trans 'Home' %}</a></li>
+            <li class="text-gray-400">/</li>
+            <li class="text-gray-700 font-semibold">{% trans 'Admin Panel' %}</li>
+        </ol>
+    </nav>
 
-<div class="title-1"><i class="fas fa-user-tie"></i>{% trans 'Admin Panel' %}</div>
-<br>
-<br>
+    <!-- Title -->
+    <div class="text-center pb-12">
+        <h1 class="text-4xl lg:text-5xl font-bold text-sky-green-600 drop-shadow-sm">
+            <i class="fas fa-user-tie mr-4 bg-gradient-to-r from-sky-green-500 to-sky-green-400 bg-clip-text text-transparent"></i>
+            {% trans 'Admin Panel' %}
+        </h1>
+    </div>
 
-{% include 'snippets/messages.html' %}
+    {% include 'snippets/messages.html' %}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="border-bottom">
-                {% trans 'Manage' %}<a class="link" href="{% url 'lecturer_list' %}"> {% trans 'Lecturers' %} &raquo;</a>
-                <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) lecturers</p>
+    <!-- Cards Grid -->
+    <div class="container mx-auto px-6 pb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            
+            <!-- Manage Lecturers Card -->
+            <div class="group bg-gradient-to-br from-white to-sky-green-50/50 rounded-3xl p-8 shadow-xl shadow-sky-green-500/10 border border-sky-green-200/20 hover:shadow-2xl hover:shadow-sky-green-500/20 hover:-translate-y-2 transition-all duration-500 min-h-[280px] flex flex-col">
+                <div class="w-16 h-16 bg-gradient-to-r from-sky-green-500 to-sky-green-400 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                    <i class="fas fa-chalkboard-teacher text-white text-xl"></i>
+                </div>
+                <div class="flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-tight">
+                        {% trans 'Manage' %} <a href="{% url 'lecturer_list' %}" class="bg-gradient-to-r from-sky-green-600 to-sky-green-500 bg-clip-text text-transparent hover:from-sky-green-700 hover:to-sky-green-600 transition-all duration-300">{% trans 'Lecturers' %} &raquo;</a>
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">CRUD (Create, Retrieve, Update &amp; Delete) lecturers</p>
+                </div>
             </div>
 
-            <div class="border-bottom mt-3">
-                {% trans 'Manage' %}<a class="link" href="{% url 'student_list' %}"> {% trans 'Students' %} &raquo;</a>
-            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'students' %}</p>
+            <!-- Manage Students Card -->
+            <div class="group bg-gradient-to-br from-white to-sky-green-50/50 rounded-3xl p-8 shadow-xl shadow-sky-green-500/10 border border-sky-green-200/20 hover:shadow-2xl hover:shadow-sky-green-500/20 hover:-translate-y-2 transition-all duration-500 min-h-[280px] flex flex-col">
+                <div class="w-16 h-16 bg-gradient-to-r from-sky-green-500 to-sky-green-400 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                    <i class="fas fa-user-graduate text-white text-xl"></i>
+                </div>
+                <div class="flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-tight">
+                        {% trans 'Manage' %} <a href="{% url 'student_list' %}" class="bg-gradient-to-r from-sky-green-600 to-sky-green-500 bg-clip-text text-transparent hover:from-sky-green-700 hover:to-sky-green-600 transition-all duration-300">{% trans 'Students' %} &raquo;</a>
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'students' %}</p>
+                </div>
             </div>
 
-            <div class="border-bottom mt-3">
-                {% trans 'Manage' %}<a class="link" href="{% url 'session_list' %}"> {% trans 'Session' %} &raquo;</a>
-            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'sessions' %}</p>
+            <!-- Manage Session Card -->
+            <div class="group bg-gradient-to-br from-white to-sky-green-50/50 rounded-3xl p-8 shadow-xl shadow-sky-green-500/10 border border-sky-green-200/20 hover:shadow-2xl hover:shadow-sky-green-500/20 hover:-translate-y-2 transition-all duration-500 min-h-[280px] flex flex-col">
+                <div class="w-16 h-16 bg-gradient-to-r from-sky-green-500 to-sky-green-400 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                    <i class="fas fa-calendar-alt text-white text-xl"></i>
+                </div>
+                <div class="flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-tight">
+                        {% trans 'Manage' %} <a href="{% url 'session_list' %}" class="bg-gradient-to-r from-sky-green-600 to-sky-green-500 bg-clip-text text-transparent hover:from-sky-green-700 hover:to-sky-green-600 transition-all duration-300">{% trans 'Session' %} &raquo;</a>
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'sessions' %}</p>
+                </div>
             </div>
 
-            {% comment %} <div class="mt-3">
-                {% trans 'Manage' %}<a class="link" href="{% url 'semester_list' %}"> {% trans 'Semester' %} &raquo;</a>
-            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'semesters' %}</p>
-            </div> {% endcomment %}
-        </div>
-        <div class="col-md-6">
-            <div class="border-bottom">
-                {% trans 'Course Add' %} &amp; {% trans 'Drop' %}
-                <label class="switch switch-text switch-success switch-pill" style="float: right;">
-                <input type="checkbox" class="switch-input" checked="true">
-                <span data-on="On" data-off="Off" class="switch-label"></span>
-                <span class="switch-handle"></span>
-                </label>
-                <p class="text-muted">{% trans 'Switch' %} 
-                    <i class="info-text py-0 px-2 bg-success text-light">ON</i> or <i class="info-text py-0 px-2 bg-danger text-light">OFF</i>
-                </p>
+            <!-- Course Add & Drop Card (Special) -->
+            <div class="group bg-gradient-to-br from-sky-green-500 to-sky-green-600 rounded-3xl p-8 shadow-xl shadow-sky-green-500/25 hover:shadow-2xl hover:shadow-sky-green-500/30 hover:-translate-y-2 transition-all duration-500 min-h-[280px] flex flex-col text-white relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-sky-green-400/20 to-transparent opacity-50"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white/20 backdrop-blur-lg rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                        <i class="fas fa-toggle-on text-white text-xl"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold mb-3 leading-tight">
+                            {% trans 'Course Add' %} &amp; {% trans 'Drop' %}
+                        </h3>
+                        <p class="text-sky-green-100 text-sm leading-relaxed mb-4">{% trans 'Switch course registration on or off' %}</p>
+                        
+                        <!-- Toggle Switch -->
+                        <div class="flex items-center space-x-4">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="registrationToggle" class="sr-only peer" checked>
+                                <div class="w-16 h-8 bg-white/30 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-8 peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-7 after:w-7 after:transition-all peer-checked:bg-white/50"></div>
+                            </label>
+                            <div class="flex items-center space-x-2">
+                                <span id="statusOn" class="px-3 py-1 bg-green-500/30 text-green-200 rounded-full text-xs font-semibold border border-green-400/30">ON</span>
+                                <span class="text-sky-green-200 text-sm">or</span>
+                                <span id="statusOff" class="px-3 py-1 bg-red-500/30 text-red-200 rounded-full text-xs font-semibold border border-red-400/30 opacity-50">OFF</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="border-bottom mt-3">
-                {% trans 'Manage' %}<a class="link" href="{% url 'programs' %}"> {% trans 'Programs' %} &amp; {% trans 'Courses' %} &raquo;</a>
-            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'programs' %}</p>
+            <!-- Manage Programs & Courses Card -->
+            <div class="group bg-gradient-to-br from-white to-sky-green-50/50 rounded-3xl p-8 shadow-xl shadow-sky-green-500/10 border border-sky-green-200/20 hover:shadow-2xl hover:shadow-sky-green-500/20 hover:-translate-y-2 transition-all duration-500 min-h-[280px] flex flex-col">
+                <div class="w-16 h-16 bg-gradient-to-r from-sky-green-500 to-sky-green-400 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                    <i class="fas fa-book-open text-white text-xl"></i>
+                </div>
+                <div class="flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-tight">
+                        {% trans 'Manage' %} <a href="{% url 'programs' %}" class="bg-gradient-to-r from-sky-green-600 to-sky-green-500 bg-clip-text text-transparent hover:from-sky-green-700 hover:to-sky-green-600 transition-all duration-300">{% trans 'Programs' %} &amp; {% trans 'Courses' %} &raquo;</a>
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'programs' %}</p>
+                </div>
             </div>
 
-            <div class="border-bottom mt-3">
-                {% trans 'Manage' %}<a class="link" href="{% url 'course_allocation_view' %}"> {% trans 'Course Allocations' %} &raquo;</a>
-            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'course allocations' %}</p>
+            <!-- Manage Course Allocations Card -->
+            <div class="group bg-gradient-to-br from-white to-sky-green-50/50 rounded-3xl p-8 shadow-xl shadow-sky-green-500/10 border border-sky-green-200/20 hover:shadow-2xl hover:shadow-sky-green-500/20 hover:-translate-y-2 transition-all duration-500 min-h-[280px] flex flex-col">
+                <div class="w-16 h-16 bg-gradient-to-r from-sky-green-500 to-sky-green-400 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                    <i class="fas fa-tasks text-white text-xl"></i>
+                </div>
+                <div class="flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-tight">
+                        {% trans 'Manage' %} <a href="{% url 'course_allocation_view' %}" class="bg-gradient-to-r from-sky-green-600 to-sky-green-500 bg-clip-text text-transparent hover:from-sky-green-700 hover:to-sky-green-600 transition-all duration-300">{% trans 'Course Allocations' %} &raquo;</a>
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'course allocations' %}</p>
+                </div>
             </div>
 
-            <div class="mt-3">
-                {% trans 'Manage' %}<a class="link" href="{% url 'home' %}"> {% trans 'News' %} &amp; {% trans 'Events' %} &raquo;</a>
-            <p class="text-muted">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'News' %} &amp; {% trans 'Events' %}</p>
+            <!-- Manage News & Events Card -->
+            <div class="group bg-gradient-to-br from-white to-sky-green-50/50 rounded-3xl p-8 shadow-xl shadow-sky-green-500/10 border border-sky-green-200/20 hover:shadow-2xl hover:shadow-sky-green-500/20 hover:-translate-y-2 transition-all duration-500 min-h-[280px] flex flex-col">
+                <div class="w-16 h-16 bg-gradient-to-r from-sky-green-500 to-sky-green-400 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                    <i class="fas fa-newspaper text-white text-xl"></i>
+                </div>
+                <div class="flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-tight">
+                        {% trans 'Manage' %} <a href="{% url 'home' %}" class="bg-gradient-to-r from-sky-green-600 to-sky-green-500 bg-clip-text text-transparent hover:from-sky-green-700 hover:to-sky-green-600 transition-all duration-300">{% trans 'News' %} &amp; {% trans 'Events' %} &raquo;</a>
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">CRUD (Create, Retrieve, Update &amp; Delete) {% trans 'News' %} &amp; {% trans 'Events' %}</p>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
 
 {% endblock %}
+
+{% block js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('registrationToggle');
+    const statusOn = document.getElementById('statusOn');
+    const statusOff = document.getElementById('statusOff');
+    
+    // Load saved state from localStorage
+    const savedState = localStorage.getItem('courseRegistrationEnabled');
+    if (savedState === 'false') {
+        toggle.checked = false;
+        updateStatus(false);
+    }
+    
+    function updateStatus(isEnabled) {
+        if (isEnabled) {
+            statusOn.classList.remove('opacity-50');
+            statusOff.classList.add('opacity-50');
+        } else {
+            statusOn.classList.add('opacity-50');
+            statusOff.classList.remove('opacity-50');
+        }
+    }
+    
+    toggle.addEventListener('change', function() {
+        const isEnabled = this.checked;
+        
+        // Update visual status
+        updateStatus(isEnabled);
+        
+        // Save state to localStorage
+        localStorage.setItem('courseRegistrationEnabled', isEnabled.toString());
+        
+        // Show feedback message
+        const message = isEnabled ? 
+            '{% trans "Course registration has been enabled" %}' : 
+            '{% trans "Course registration has been disabled" %}';
+            
+        // Create and show toast notification
+        const toast = document.createElement('div');
+        toast.className = `fixed top-4 right-4 px-6 py-3 rounded-xl shadow-lg z-50 transition-all duration-300 transform translate-x-full ${isEnabled ? 'bg-green-500' : 'bg-red-500'} text-white font-semibold`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        // Animate in
+        setTimeout(() => {
+            toast.classList.remove('translate-x-full');
+        }, 100);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            toast.classList.add('translate-x-full');
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 300);
+        }, 3000);
+        
+        console.log(`Course registration ${isEnabled ? 'enabled' : 'disabled'}`);
+    });
+});
+</script>
+{% endblock js %}

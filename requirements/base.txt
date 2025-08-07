@@ -25,4 +25,4 @@ python-decouple==3.8
 stripe==5.5.0
 gopay==2.0.1
 legacy-cgi==2.6.3
-setuptools==80.9.0
+setuptools>=40.0.0,<76.0.0

@@ -1,22 +1,25 @@
 {% load static %}
 {% load i18n %}
 
-<div id="side-nav">
+<div id="side-nav" class="bg-gradient-to-b from-white to-sky-green-50 border-r border-sky-green-200/30 shadow-xl shadow-sky-green-500/10">
 	<div class="main-menu">
-		<div class="top-side text-center py-4" style="background-image: url({% static 'img/dotted.jpg' %});">
-			<div class="desktop-hide">
+		<div class="top-side text-center py-6 bg-gradient-to-br from-sky-green-500 to-sky-green-600 relative overflow-hidden">
+			<div class="absolute inset-0 bg-gradient-to-r from-sky-green-400/20 to-transparent opacity-50"></div>
+			<div class="desktop-hide relative z-10">
 				<div class="toggle-btn" onclick="toggleSidebar()">
-					<i class="fas fa-times"></i>
+					<i class="fas fa-times text-white hover:text-sky-green-200 transition-colors cursor-pointer"></i>
 				</div>
 			</div>
-			<a href="/">
-				<img src="{% static 'img/brand.svg' %}" width="210px" alt="SkyLearn">
-			</a>
-			<p class="mt-2 small">
-				<mark class="bg-secondary text-light" style="border-radius: 2px; padding: 2px 5px;">
-					{{ request.user.get_user_role }}
-				</mark>
-			</p>
+			<div class="relative z-10">
+				<a href="/" class="block">
+					<img src="{% static 'img/brand.svg' %}" width="180px" alt="SkyLearn" class="mx-auto drop-shadow-lg">
+				</a>
+				<div class="mt-4">
+					<span class="inline-block bg-white/20 backdrop-blur-sm text-white font-semibold px-4 py-2 rounded-full text-sm border border-white/30">
+						{{ request.user.get_user_role }}
+					</span>
+				</div>
+			</div>
 		</div>
 		{% url 'home' as hom %} {% url 'dashboard' as dash %} {% url 'profile' as prof %}
 		{% url 'lecturer_list' as lec %}
@@ -29,101 +32,158 @@
 		
 
 
-		<ul>
-			{% if request.user.is_superuser %}
-			<li class="{% if request.path == dash %}active{% endif %}">
-				<a href="{% url 'dashboard' %}"><i class="fas fa-tachometer-alt"></i>{% trans 'Dashboard' %}</a>
-			</li>
-			{% endif %}
-			<li class="{% if request.path == hom %}active{% endif %}">
-				<a href="{% url 'home' %}"><i class="fas fa-home"></i>{% trans 'Home' %}</a>
-			</li>
-			<li class="{% if request.path == prof %}active{% endif %}">
-				<a href="{% url 'profile' %}"><i class="fas fa-user"></i>{% trans 'Profile' %}</a>
-			</li>
+		<div class="px-4 py-6">
+			<ul class="space-y-2">
+				{% if request.user.is_superuser %}
+				<li>
+					<a href="{% url 'dashboard' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == dash %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-tachometer-alt w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Dashboard' %}</span>
+					</a>
+				</li>
+				{% endif %}
+				
+				<li>
+					<a href="{% url 'home' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == hom %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-home w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Home' %}</span>
+					</a>
+				</li>
+				
+				<li>
+					<a href="{% url 'profile' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == prof %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-user w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Profile' %}</span>
+					</a>
+				</li>
 
-			{% if request.user.is_superuser %}
-			<li class="{% if request.path == admin_p %}active{% endif %}">
-				<a href="{% url 'admin_panel' %}"><i class="fas fa-user-tie"></i>{% trans 'Admin Panel' %}</a>
-			</li>
-			<li class="{% if request.path == lec %}active{% endif %}">
-				<a href="{% url 'lecturer_list' %}"><i class="fas fa-chalkboard-teacher"></i>{% trans 'Lecturers' %}</a>
-			</li>
-			<li class="{% if request.path == stu %}active{% endif %}">
-				<a href="{% url 'student_list' %}"><i class="fas fa-user-graduate"></i>{% trans 'Students' %}</a>
-			</li>
-			{% endif %}
+				{% if request.user.is_superuser %}
+				<li>
+					<a href="{% url 'admin_panel' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == admin_p %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-user-tie w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Admin Panel' %}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'lecturer_list' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == lec %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-chalkboard-teacher w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Lecturers' %}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'student_list' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == stu %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-user-graduate w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Students' %}</span>
+					</a>
+				</li>
+				{% endif %}
 
-			{% if request.user.is_instructor_examiner or request.user.is_trainee %}
-			<li class="{% if request.path == ucl %}active{% endif %}">
-				<a href="{% url 'user_course_list' %}"><i class="fas fa-book"></i>{% trans 'My Courses' %}</a>
-			</li>
-			{% endif %}
+				{% if request.user.is_instructor_examiner or request.user.is_trainee %}
+				<li>
+					<a href="{% url 'user_course_list' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == ucl %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-book w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'My Courses' %}</span>
+					</a>
+				</li>
+				{% endif %}
 
-			{% if request.user.is_superuser or request.user.is_instructor_examiner %}
-			<li class="{% if request.path == pro %}active{% endif %}">
-				<a href="{% url 'programs' %}"><i class="fas fa-book-open"></i>{% trans 'Programs & Courses' %}</a>
-			</li>
-			{% endif %}
+				{% if request.user.is_superuser or request.user.is_instructor_examiner %}
+				<li>
+					<a href="{% url 'programs' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == pro %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-book-open w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Programs & Courses' %}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'quiz_marking' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == qce %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-check-double w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Complete Exams' %}</span>
+					</a>
+				</li>
+				{% endif %}
 
-			{% if request.user.is_superuser or request.user.is_instructor_examiner %}
-			<li class="{% if request.path == qce %}active{% endif %}">
-				<a href="{% url 'quiz_marking' %}"><i class="fas fa-check-double"></i>{% trans 'Complete Exams' %}</a>
-			</li>
-			{% endif %}
+				{% if request.user.is_superuser %}
+				<li>
+					<a href="{% url 'quiz_progress' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == qpr %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-record-vinyl w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Quiz Progress Rec' %}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'course_allocation_view' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == cav %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-tasks w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Course Allocation' %}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'session_list' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == sess %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-calendar-week w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Manage Session' %}</span>
+					</a>
+				</li>
+				{% endif %}
 
-			{% if request.user.is_superuser %}
-			<li class="{% if request.path == qpr %}active{% endif %}">
-				<a href="{% url 'quiz_progress' %}"><i class="fas fa-record-vinyl"></i>{% trans 'Quiz Progress Rec' %}</a>
-			</li>
-			<li class="{% if request.path == cav %}active{% endif %}">
-				<a href="{% url 'course_allocation_view' %}"><i class="fas fa-tasks"></i>{% trans 'Course Allocation' %}</a>
-			</li>
-			<li class="{% if request.path == sess %}active{% endif %}">
-				<a href="{% url 'session_list' %}"><i class="fas fa-calendar-week"></i>{% trans 'Manage Session' %}</a>
-			</li>
-			{% comment %} <li class="{% if request.path == sem %}active{% endif %}">
-				<a href="{% url 'semester_list' %}"><i class="fas fa-calendar-alt"></i>{% trans 'Manage Semester' %}</a>
-			</li> {% endcomment %}
-			{% endif %}
+				{% if request.user.is_instructor_examiner %}
+				<li>
+					<a href="{% url 'add_score' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == ascore %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-table w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Manage Score' %}</span>
+					</a>
+				</li>
+				{% endif %}
 
-			{% if request.user.is_instructor_examiner %}
-			<li class="{% if request.path == ascore %}active{% endif %}">
-				<a href="{% url 'add_score' %}"><i class="fas fa-table"></i>{% trans 'Manage Score' %}</a>
-			</li>
-			{% endif %}
-
-			{% if request.user.is_trainee %}
-			<li class="{% if request.path == qpr %}active{% endif %}">
-				<a href="{% url 'quiz_progress' %}"><i class="fas fa-record-vinyl"></i>{% trans 'Quiz Progress Rec' %}</a>
-			</li>
-			<li class="{% if request.path == vr %}active{% endif %}">
-				<a href="{% url 'grade_results' %}"><i class="fa fa-spell-check"></i>{% trans 'Grade Results' %}</a>
-			</li>
-			<li class="{% if request.path == ar %}active{% endif %}">
-				<a href="{% url 'ass_results' %}"><i class="fa fa-list-ol"></i> {% trans 'Assesment Results' %}</a>
-			</li>
-			<li class="{% if request.path == cr %}active{% endif %}">
-				<a href="{% url 'course_registration' %}"><i class="fas fa-plus"></i>{% trans 'Add' %} &amp; {% trans 'Drop Course' %}</a>
-			</li>
-			{% endif %}
-			<br />
-			<p class="ms-3 text-secondary">&RightArrow; Others</p>
-			<li class="{% if request.path == ep %}active{% endif %}">
-				<a href="{% url 'edit_profile' %}"><i class="fas fa-cogs"></i>{% trans 'Account Setting' %}</a>
-			</li>
-			<li class="{% if request.path == cp %}active{% endif %}">
-				<a href="{% url 'change_password' %}"><i class="fas fa-key"></i>{% trans 'Change Password' %}</a>
-			</li>
-		</ul>
+				{% if request.user.is_trainee %}
+				<li>
+					<a href="{% url 'quiz_progress' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == qpr %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-record-vinyl w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Quiz Progress Rec' %}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'grade_results' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == vr %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fa fa-spell-check w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Grade Results' %}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'ass_results' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == ar %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fa fa-list-ol w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Assessment Results' %}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'course_registration' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == cr %}bg-white/30 text-white shadow-lg{% endif %}">
+						<i class="fas fa-plus w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+						<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Add' %} &amp; {% trans 'Drop Course' %}</span>
+					</a>
+				</li>
+				{% endif %}
+				
+				<!-- Others Section -->
+				<div class="pt-6">
+					<h3 class="px-4 text-xs font-semibold text-gray-600 uppercase tracking-wider mb-3">{% trans 'Others' %}</h3>
+					<li>
+						<a href="{% url 'edit_profile' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == ep %}bg-white/30 text-white shadow-lg{% endif %}">
+							<i class="fas fa-cogs w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+							<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Account Setting' %}</span>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'change_password' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-800 hover:bg-white/20 hover:text-white transition-all duration-300 group {% if request.path == cp %}bg-white/30 text-white shadow-lg{% endif %}">
+							<i class="fas fa-key w-5 h-5 mr-3 group-hover:scale-110 transition-transform text-gray-800 group-hover:text-white"></i>
+							<span class="font-medium text-gray-800 group-hover:text-white">{% trans 'Change Password' %}</span>
+						</a>
+					</li>
+				</div>
+			</ul>
+		</div>
 	</div>
 
-	<footer class="card-footer mt-5 pt-3 pb-5 px-2">
-		<div class="col-12">
-
+	<footer class="mt-8 p-4 border-t border-sky-green-200/30">
+		<div class="px-4">
 			<form action="{% url 'set_language' %}" method="post" id="lang-form">{% csrf_token %}
 				<input name="next" type="hidden" value="{{ redirect_to }}">
-				<select class="small" name="language" id="lang-select">
+				<select class="w-full px-4 py-2 bg-white border border-sky-green-200 rounded-xl text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-green-500 focus:border-transparent transition-all duration-200" name="language" id="lang-select">
 					{% get_current_language as LANGUAGE_CODE %}
 					{% get_available_languages as LANGUAGES %}
 					{% get_language_info_list for LANGUAGES as languages %}
